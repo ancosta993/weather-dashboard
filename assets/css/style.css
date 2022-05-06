@@ -1,0 +1,18 @@
+#current-condition{
+   border: 1px solid black;
+   min-height: fit-content;
+}
+
+.jumbotron{
+   padding:1rem 0;
+}
+
+.search-container{
+   margin-bottom:2%;
+}
+
+.btn{
+   margin-top:10px;
+   width:100%;
+   text-align: center;
+}

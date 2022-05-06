@@ -4,6 +4,7 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
    <link rel="stylesheet" href="./assets/css/style.css">
    <title>Document</title>
@@ -13,6 +14,61 @@
       <h1 class="mb-3">Wheather Dashboard</h1>
    </header>
    
+   <main>
+      <!-- row of search term and current data -->
+      <div class="row">
+         <!-- form input form search term -->
+         <div class="col-12 col-lg-3 search-container">
+            <div class='card'>
+               <h3 class="card-header text-uppercase">Search by City</h3>
+               <form id="user-form" class="card-body">
+                  <label for="city" class="form-label">City Name</label>
+                  <input type="text" name="city" id="city" class="form-input" autofocus='true'>
+                  <button type="submit" class="btn bg-dark text-light">Search</button>
+               </form>
+            </div>
+         </div>
+         <!-- current data display -->
+         <div class="col-12 col-lg-9 mb-3 card" id="current-condition">
+         </div>
+      </div>
+      <!-- second row for the search history and future condition display -->
+      <div class="row">
+         <!-- seach history list -->
+         <ul class="col-12 col-lg-3 list-group search-container">
+   
+         </ul>
+         <!-- future weather condition display -->
+         <div class="d-flex flex-row justify-content-between col-12 col-lg-9 future-condition-container">
+
+            <div class="card" id="day1">
+               <h3 class="card-header">12/12/12</h3>
+               <div class="card-body"></div>
+            </div>
+            <div class="card" id="day2">
+               <h3 class="card-header">12/12/12</h3>
+               <div class="card-body"></div>
+            </div>
+            
+            <div class="card" id="day3">
+               <h3 class="card-header">12/12/12</h3>
+               <div class="card-body"></div>
+            </div>
+            <div class="card" id="day4">
+               <h3 class="card-header">12/12/12</h3>
+               <div class="card-body"></div>
+            </div>
+            <div class="card" id="day5">
+               <h3 class="card-header">12/12/12</h3>
+               <div class="card-body"></div>
+            </div>
+
+         </div>
+      </div>
+   </main>
+
+   <!-- moment.js CDN -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
    <script src="./assets/js/script.js"></script>
 </body>
 </html>
