@@ -1,3 +1,7 @@
+
+// initialize an array to seach the city names
+var searchHistoryArr = [];
+
 var currentCondition = document.querySelector("#current-condition");
 var userFormEl = document.querySelector("#user-form");
 var userSearchInput = document.querySelector("#city");
@@ -84,14 +88,23 @@ var getWeatherData = function (city){
 
 }
 
+var storeInBrowser = function(arr){
+   var arr = JSON.stringify(arr);
+   localStorage.setItem("Search-History", arr);
+}
+
 var saveCity = function(city){
    var cityName = document.createElement('li');
    cityName.classList = "list-group-item text-center";
    cityName.setAttribute('data-name', city);
    cityUpper = city.toUpperCase();
    cityName.textContent = cityUpper;
+   searchHistoryArr.push(city);
+   storeInBrowser(searchHistoryArr);
    searchContainer.appendChild(cityName);
 }
+
+
 
 var formSubmitHandler = function(event){
    event.preventDefault();
@@ -112,6 +125,18 @@ var btnClickHandler = function(event){
       getWeatherData(selectedCity);
    }
 };
+
+var getCityNamesHistory = function(){
+   cityArr = JSON.parse(localStorage.getItem("Search-History"));
+   if (!cityArr){
+      cityArr = [];
+   } 
+   for(var i = 0;i<cityArr.length;i++){
+      saveCity(cityArr[i]);
+   }
+};
+
+getCityNamesHistory();
 
 userFormEl.addEventListener('submit', formSubmitHandler);
 searchContainer.addEventListener('click', btnClickHandler);

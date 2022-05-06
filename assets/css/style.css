@@ -1,6 +1,5 @@
 #current-condition{
-   border: 1px solid black;
-   min-height: fit-content;
+ border:none;
 }
 
 .jumbotron{
