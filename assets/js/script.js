@@ -5,7 +5,7 @@ var searchHistoryArr = [];
 var currentCondition = document.querySelector("#current-condition");
 var userFormEl = document.querySelector("#user-form");
 var userSearchInput = document.querySelector("#city");
-var searchContainer = document.querySelector(".search-container");
+var searchHistory = document.querySelector(".search-history");
 
 // function to display general info (name, date, icon)
 var displayCity = function(data){
@@ -101,7 +101,7 @@ var saveCity = function(city){
    cityName.textContent = cityUpper;
    searchHistoryArr.push(city);
    storeInBrowser(searchHistoryArr);
-   searchContainer.appendChild(cityName);
+   searchHistory.appendChild(cityName);
 }
 
 
@@ -139,7 +139,7 @@ var getCityNamesHistory = function(){
 getCityNamesHistory();
 
 userFormEl.addEventListener('submit', formSubmitHandler);
-searchContainer.addEventListener('click', btnClickHandler);
+searchHistory.addEventListener('click', btnClickHandler);
 
 
 
