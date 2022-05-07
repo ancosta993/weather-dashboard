@@ -43,12 +43,8 @@ var displayHumid = function(data){
    return humid;
 }
 
-
-
 // displaying the fetched information in the
 var displayCurrent = function(data){
-   console.log(data);
-
    // Show city name, date, and weather icon
    currentCondition.appendChild(displayCity(data));
 
@@ -63,10 +59,41 @@ var displayCurrent = function(data){
    currList.appendChild(displayWindSpeed(data));
    // humidity
    currList.appendChild(displayHumid(data));
+   // UV index
+   // get Uv index from a different API
+   var getUvIndex = function(data){
+      var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + data.coord.lat + "&lon="+data.coord.lon+"&units=imperial&appid=c8f16f5a8fcb4998319fd1d12ef65633";
 
+      fetch(apiUrl).then(function(response){
+         if(response.ok){
+            response.json().then(function(uvData){
+               console.log(uvData);
+               var uvIndexEl = document.createElement("li");
+               // creating a span for color coding index
+               var indexEl = document.createElement('span');
+               indexEl.textContent = uvData.current.uvi;
+               // use condition to color code the uvi index
+               if(uvData.current.uvi >= 6){
+                  indexEl.classList = "badge badge-danger";
+               } else if (uvData.current.uvi < 6 && uvData.current.uvi>=3) {
+                  indexEl.classList = "badge badge-warning";
+               } else {
+                  indexEl.classList = "badge badge-success";
+               }
 
-
+               uvIndexEl.className = "list-group-item";
+               uvIndexEl.textContent = "UV index: "
+               uvIndexEl.appendChild(indexEl);
+               currList.appendChild(uvIndexEl);
+            });
+         } else {
+            alert("Could not find the UV index.");
+         }
+      });
+   };
+   getUvIndex(data);
    currentCondition.appendChild(currList);
+
 
 };
 
@@ -82,11 +109,12 @@ var getWeatherData = function (city){
             displayCurrent(data);
          });
       } else {
-         alert("Could not find the city!Please check your spelling.");
+         alert("Could not find the city! Please check your spelling.");
       }
    });
 
 }
+
 
 var storeInBrowser = function(arr){
    var arr = JSON.stringify(arr);
