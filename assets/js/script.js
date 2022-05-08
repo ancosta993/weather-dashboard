@@ -6,6 +6,8 @@ var currentCondition = document.querySelector("#current-condition");
 var userFormEl = document.querySelector("#user-form");
 var userSearchInput = document.querySelector("#city");
 var searchHistory = document.querySelector(".search-history");
+var futureForcastContainer = document.querySelector(".future-condition-container");
+
 
 // function to display general info (name, date, icon)
 var displayCity = function(data){
@@ -27,6 +29,7 @@ var displayTemp = function(data){
    tempListEl.textContent = "Temperature: " + data.main.temp + " F";
    return tempListEl;
 };
+
 
 // function to display wind speed
 var displayWindSpeed = function(data){
@@ -67,7 +70,6 @@ var displayCurrent = function(data){
       fetch(apiUrl).then(function(response){
          if(response.ok){
             response.json().then(function(uvData){
-               console.log(uvData);
                var uvIndexEl = document.createElement("li");
                // creating a span for color coding index
                var indexEl = document.createElement('span');
@@ -112,6 +114,68 @@ var getWeatherData = function (city){
          alert("Could not find the city! Please check your spelling.");
       }
    });
+
+   var forcastUrl = "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&units=imperial&appid=c8f16f5a8fcb4998319fd1d12ef65633"
+
+   var displayForcast = function(obj){
+
+      // make the card
+      var card = document.createElement("div");
+      card.classList = "card days";
+      // card header
+      var cardHead = document.createElement("h3");
+      cardHead.textContent = moment(obj.dt_txt).format("MM/DD/YYYY");
+      cardHead.className = "card-header"
+      // card body 
+      var cardBody = document.createElement("div");
+      cardBody.className = "card-body";
+
+      // list icon
+      var cardIcon = document.createElement("img");
+      cardIcon.setAttribute("src", "https://openweathermap.org/img/wn/" + obj.weather[0].icon + "@2x.png");
+      cardBody.appendChild(cardIcon);      
+
+      // list temp
+      var tempEl = document.createElement("li");
+      tempEl.textContent = "Temp: " + obj.main.temp + " F";
+      cardBody.appendChild(tempEl);
+
+      // list humidity
+      var humidEl = document.createElement("li");
+      humidEl.textContent = "Humidity: " + obj.main.humidity +"%";
+      cardBody.appendChild(humidEl);
+
+      // list wind speed
+      var windEl = document.createElement("li");
+      windEl.textContent = "Wind: " + obj.wind.speed + " MPH";
+      cardBody.appendChild(windEl);
+
+      
+      card.appendChild(cardHead);
+      card.appendChild(cardBody);
+      futureForcastContainer.appendChild(card);
+      
+
+   }
+
+   fetch(forcastUrl).then(function(response){
+      if(response.ok){
+         response.json().then(function(data){
+            console.log(data);
+            // get the list of dates from the object
+            var dateArr = data.list;
+            futureForcastContainer.textContent = '';
+            // loop through the list in the object
+            for (var i=0;i<dateArr.length;i+=7){
+               // displaying the forcast
+              displayForcast(dateArr[i]);
+              i+=1;
+            }
+         });
+      } else {
+         alert("Could not get the forcast data");
+      }
+   })
 
 }
 
