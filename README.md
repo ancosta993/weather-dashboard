@@ -1,5 +1,5 @@
 # weather-dashboard
-Click here for the deployed project.
+Click [here](https://ancosta993.github.io/weather-dashboard/) for the deployed project.
 
 ## Introduction
 This application is used to get the weather information about a given city and its next five days forcast.
@@ -75,6 +75,6 @@ It takes the lattitude and longtitude information and `fetch` the data for the c
  **`loadLocalStorage`**
  Gets an array from the local storage. It contains names for all the searched cities. `saveCity` is called for every elements of the array to display the names in the search history. Of no array is found, an empty array is created to keep track of the newly added city names.
 
-
+## Finished Look
  
  
