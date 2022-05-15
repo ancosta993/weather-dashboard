@@ -21,8 +21,8 @@
 }
 
 .days{
-   height: 400px;
-   width: 20%;
+   min-height: 400px;
+   width: 19%;
    line-height: 4;
    font-weight: 700;
    margin:0;
@@ -37,4 +37,10 @@
 .search-history{
    position:relative;
    bottom:20px;
+}
+
+@media screen and (max-width: 1360px){
+   .days{
+      width:100%;
+   }
 }
